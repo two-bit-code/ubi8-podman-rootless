@@ -17,7 +17,7 @@ FROM registry.access.redhat.com/ubi8-init:8.7-6
 RUN dnf --disableplugin=subscription-manager --disablerepo=* --enablerepo=ubi-8-appstream-rpms --enablerepo=ubi-8-baseos-rpms -y update && \
     rpm --setcaps shadow-utils 2>/dev/null && \
     dnf --disableplugin=subscription-manager --disablerepo=* --enablerepo=ubi-8-appstream-rpms --enablerepo=ubi-8-baseos-rpms -y \
-    install podman podman-docker fuse-overlayfs git --exclude container-selinux && \
+    install podman podman-docker fuse-overlayfs git libicu lttng-ust --exclude container-selinux && \
     dnf --disableplugin=subscription-manager --disablerepo=* --enablerepo=ubi-8-appstream-rpms --enablerepo=ubi-8-baseos-rpms clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
