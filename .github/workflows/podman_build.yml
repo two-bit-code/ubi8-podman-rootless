@@ -1,0 +1,27 @@
+name: Build flask container with podman
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/podman_build.yml
+
+jobs:
+  build:
+    name: Build image
+    runs-on: [self-hosted, Linux, podman-rootless]
+    env:
+      IMAGE_NAME: ubi-flask
+      REGISTRY: ghcr.io/major
+    steps:
+      - name: show the env
+        run: printenv
+      - name: Clone the repository
+        uses: actions/checkout@v3
+
+      - name: Hello world action step
+        id: hello
+        uses: two-bit-code/hello-world-docker-action@newbloke82-patch-1
+        with:
+          who-to-greet: 'Mona the Octocat'
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
