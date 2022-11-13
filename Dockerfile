@@ -25,6 +25,9 @@ RUN useradd podman; \
 echo -e "podman:1:999\npodman:1001:64535" > /etc/subuid; \
 echo -e "podman:1:999\npodman:1001:64535" > /etc/subgid;
 
+RUN systemctl enable podman.service
+ADD podman.conf /usr/lib/tmpfiles.d/podman.conf
+
 ARG _REPO_URL="https://raw.githubusercontent.com/containers/podman/main/contrib/podmanimage/stable"
 ADD $_REPO_URL/containers.conf /etc/containers/containers.conf
 ADD $_REPO_URL/podman-containers.conf /home/podman/.config/containers/containers.conf
