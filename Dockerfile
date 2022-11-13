@@ -6,7 +6,8 @@
 # This image can be used to create a secured container
 # that runs safely with privileges within the container.
 #
-FROM registry.access.redhat.com/ubi8-init:8.7-6
+#FROM registry.access.redhat.com/ubi8-init:8.7-6
+FROM registry.access.redhat.com/ubi8:8.7-929
 
 # Don't include container-selinux and remove
 # directories used by dnf that are just taking
@@ -24,9 +25,6 @@ RUN dnf --disableplugin=subscription-manager --disablerepo=* --enablerepo=ubi-8-
 RUN useradd podman; \
 echo -e "podman:1:999\npodman:1001:64535" > /etc/subuid; \
 echo -e "podman:1:999\npodman:1001:64535" > /etc/subgid;
-
-RUN systemctl enable podman.service
-ADD podman.conf /usr/lib/tmpfiles.d/podman.conf
 
 ARG _REPO_URL="https://raw.githubusercontent.com/containers/podman/main/contrib/podmanimage/stable"
 ADD $_REPO_URL/containers.conf /etc/containers/containers.conf
