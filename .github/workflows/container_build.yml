@@ -18,7 +18,7 @@ jobs:
 
       - name: Hello world action step
         id: hello
-        uses: actions/hello-world-docker-action@v2
+        uses: two-bit-code/hello-world-docker-action@newbloke82-patch-1
         with:
           who-to-greet: 'Mona the Octocat'
       - name: Get the output time
